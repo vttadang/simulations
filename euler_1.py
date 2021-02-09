@@ -9,7 +9,7 @@ def euler_approx(g, a, b, h, n):
     for i in range(1, n + 1):
         new_y = y_values[i - 1] + h * g(a + (i-1) * h, y_values[i-1])
         y_values.append(new_y)
-    return y_values[-1]
+    return y_values
 
 
 if __name__ == '__main__':
@@ -18,5 +18,10 @@ if __name__ == '__main__':
     a, b, h = [float(val) for val in input('Enter a, b, h: ').split(',')]
     n = int(input('Please enter n: '))
     print(f'Your IVP is y\' = {user_function}, y({a}) = {b}.')
-    print(f'Euler approximation {n} steps with step size {h} is: y({a + n*h}) ='
-          f' {euler_approx(g, a, b, h, n)}')
+    print(f'Euler approximation with {n} steps and step size {h}:')
+    print('x', end=': ')
+    for i in range(n+1):
+        print(f'{a + i*h:6.3f}', end='   ')
+    print('\ny', end=': ')
+    for i in range(n + 1):
+        print(f'{euler_approx(g, a, b, h, n)[i]:6.3f}', end='   ')
